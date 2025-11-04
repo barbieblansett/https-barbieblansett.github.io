@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Mirror’s Warning | Daughters of the Hollow Book One</title>
+  <meta name="description" content="The Mirror’s Warning follows Ava Parker and her sisters on their family’s magical Tennessee farm, where their grandmother’s mirror begins to warn them of something waking in the Hollow.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b10;
+      --card: rgba(10,10,15,0.55);
+      --accent: #a471ff;
+      --accent-soft: rgba(164,113,255,0.12);
+      --text: #f5f5f5;
+      --muted: #c9c9d0;
+      --border: rgba(245,245,245,0.05);
+      --max-width: 1100px;
+      --shadow: 0 20px 40px rgba(0,0,0,0.35);
+      --radius-lg: 1.5rem;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #211c33 0%, #0b0b10 45%, #050509 100%);
+      color: var(--text);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); }
+    .nav {
+      position: fixed;
+      top: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(100% - 2rem, var(--max-width));
+      background: rgba(7,7,8,0.65);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(245,245,245,0.03);
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem 0.75rem 1.1rem;
+      z-index: 999;
+      gap: 1rem;
+    }
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: .08em;
+    }
+    .nav-links { display: flex; gap: 1rem; font-size: .8rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; }
+    .nav-links a:hover { color: var(--text); }
+    .btn {
+      background: linear-gradient(135deg, #a471ff 0%, #6441f5 100%);
+      border: none;
+      color: #fff;
+      padding: .55rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: .75rem;
+      text-decoration: none;
+      display: inline-flex;
+      gap: .4rem;
+      align-items: center;
+      box-shadow: 0 15px 30px rgba(100,65,245,.26);
+    }
+    header {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1.5rem 6rem;
+      position: relative;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, rgba(164,113,255,0.15) 0%, rgba(10,10,15,0) 63%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      width: min(100%, var(--max-width));
+      display: grid;
+      grid-template-columns: 1.05fr .70fr;
+      gap: 3.5rem;
+      z-index: 1;
+      align-items: center;
+    }
+    .hero-tag {
+      display: inline-flex;
+      gap: .4rem;
+      align-items: center;
+      background: rgba(255,255,255, .03);
+      border: 1px solid rgba(255,255,255, .03);
+      border-radius: 999px;
+      padding: .35rem .75rem;
+      font-size: .65rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      margin-bottom: .85rem;
+      color: var(--muted);
+    }
+    .hero-left h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.9rem, 5vw, 3.5rem);
+      margin-bottom: 1.25rem;
+      line-height: .98;
+    }
+    .hero-left p { color: var(--muted); max-width: 40rem; }
+    .hero-actions { display: flex; gap: .85rem; margin-top: 1.25rem; flex-wrap: wrap; }
+    .ghost {
+      background: rgba(164,113,255,0.05);
+      border: 1px solid rgba(164,113,255,0.22);
+      color: var(--text);
+      padding: .55rem 1.1rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: .75rem;
+    }
+    .book-card {
+      background: rgba(7,7,8,0.7);
+      border: 1px solid rgba(245,245,245,0.024);
+      backdrop-filter: blur(14px);
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.2rem 1.4rem;
+      max-width: 360px;
+      margin-left: auto;
+      box-shadow: var(--shadow);
+    }
+    .book-cover {
+      background: radial-gradient(circle, rgba(164,113,255,.3) 0%, rgba(164,113,255,0) 80%);
+      border: 1px solid rgba(164,113,255,.15);
+      border-radius: .9rem;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: .35rem;
+      text-align: center;
+      padding: 1rem;
+    }
+    .mirror-circle {
+      width: 90px;
+      height: 90px;
+      background: radial-gradient(circle, rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 70%);
+      border: 1.5px solid rgba(245,245,245,.14);
+      border-radius: 999px;
+      box-shadow: inset 0 0 40px rgba(255,255,255,.25);
+      margin-bottom: .5rem;
+    }
+    .book-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.28rem;
+      line-height: 1.05;
+    }
+    section {
+      width: min(100% - 3rem, var(--max-width));
+      margin: 0 auto;
+      padding: 3.3rem 0;
+    }
+    .tagline {
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--muted);
+      font-size: .6rem;
+      margin-bottom: .35rem;
+      font-weight: 500;
+    }
+    h2.section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 2.15rem;
+      margin-bottom: 1rem;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.1fr .85fr;
+      gap: 2.6rem;
+      align-items: flex-start;
+    }
+    .card {
+      background: rgba(7,7,8,0.4);
+      border: 1px solid rgba(245,245,245,0.02);
+      border-radius: 1.1rem;
+      padding: 1.2rem 1.2rem 1.2rem;
+    }
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .character {
+      background: rgba(8,8,11,0.3);
+      border: 1px solid rgba(245,245,245,0.02);
+      border-radius: .95rem;
+      padding: .8rem .8rem .9rem;
+    }
+    .character small {
+      font-size: .6rem;
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      color: var(--muted);
+    }
+    .excerpt-box {
+      background: rgba(11,11,13,.35);
+      border: 1px solid rgba(245,245,245,0.015);
+      border-radius: 1.1rem;
+      padding: 1rem 1.05rem 1.1rem;
+      max-height: 320px;
+      overflow-y: auto;
+      font-size: .78rem;
+      line-height: 1.5;
+      white-space: pre-line;
+    }
+    .cta {
+      background: radial-gradient(circle at top, rgba(164,113,255,0.08) 0%, rgba(13,13,15,0) 60%);
+      border: 1px solid rgba(245,245,245,0.02);
+      border-radius: 1.3rem;
+      padding: 1.35rem 1.3rem 1.5rem;
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem 4.5rem;
+      color: var(--muted);
+      font-size: .7rem;
+    }
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .hero-grid { grid-template-columns: 1fr; }
+      header { padding-top: 6rem; }
+      .two-col { grid-template-columns: 1fr; }
+      .book-card { margin: 2rem auto 0; }
+      section { width: min(100% - 2rem, 55rem);}
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <div class="nav">
+    <div class="logo">Daughters of the Hollow</div>
+    <div class="nav-links">
+      <a href="#story">Story</a>
+      <a href="#characters">Sisters</a>
+      <a href="#excerpt">Read</a>
+      <a href="#get">Get</a>
+    </div>
+    <a href="#get" class="btn">Read Book One</a>
+  </div>
+
+  <!-- Hero -->
+  <header>
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-tag">YA fantasy • Tennessee gothic • Sisterhood</div>
+        <h1>The Mirror’s Warning</h1>
+        <p>
+          On the Parker family’s magical farm in Marion County, Tennessee, five sisters discover their grandmother Autumn is still watching them — through a mirror that cracks when they break the rules. Ava never feared the river… until the mirror said she woke something in it.
+        </p>
+        <div class="hero-actions">
+          <a href="#excerpt" class="btn">Read the opening</a>
+          <a href="#characters" class="ghost">Meet the sisters →</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="book-card">
+          <div class="book-cover">
+            <div class="mirror-circle" aria-hidden="true"></div>
+            <div class="book-title">The Mirror’s Warning</div>
+            <div style="font-size:.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:.1em;">
+              Daughters of the Hollow • Book One
+            </div>
+            <p style="font-size:.68rem; max-width: 17rem; color: #dadade;">
+              “You stirred it,” Grandmother said from the glass. “And now it stirs for you.”
+            </p>
+          </div>
+          <p style="font-size:.7rem; color:var(--muted); margin-top:1rem;">
+            Setting: Marion County, Tennessee • Themes: magic house, sisters, inherited warning, river lore
+          </p>
+          <a href="#get" class="btn" style="width:100%; justify-content:center; margin-top:.55rem;">Get this book</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Story -->
+  <section id="story">
+    <div class="two-col">
+      <div>
+        <div class="tagline">Story overview</div>
+        <h2 class="section-title">A house that breathes. A mirror that warns. A river that isn’t just water.</h2>
+        <p>
+          Ava Parker just wanted to sneak to the Tennessee River. But the Parker farmhouse — alive, musical, and moody — felt it. And so did the mirror that holds their grandmother Autumn’s spirit.
+        </p>
+        <p>
+          Now the mirror is cracking, the walls are full of rushing water, and her older sister Aubrey is done cleaning up after Ava’s magic.
+        </p>
+        <p>
+          The sisters — responsible Aubrey, sensitive Abigail, unimpressed Alicia, and wild youngest Ava — have to figure out what the mirror is warning them about before the river outside the farm decides to come inside.
+        </p>
+      </div>
+      <div class="card">
+        <h3 style="font-family:'Playfair Display', serif; margin-top:0;">What’s waking up?</h3>
+        <ul style="padding-left:1rem; color:var(--muted); font-size:.78rem;">
+          <li>The Parker house acts on its own (doors, clocks, breakfast).</li>
+          <li>Grandmother Autumn appears in mirrors to warn them.</li>
+          <li>Ava’s trip to the river “stirred it.”</li>
+          <li>Water sounds inside the walls — like a river waiting.</li>
+          <li>Asher Blackwood might know the river’s secrets.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Characters -->
+  <section id="characters">
+    <div class="tagline">Marion County cast</div>
+    <h2 class="section-title">The girls of the Parker farmhouse</h2>
+    <p style="color:var(--muted); max-width:46rem; margin-bottom:1.4rem;">
+      I used the exact names from your excerpt so the site matches your book.
+    </p>
+    <div class="character-grid">
+      <div class="character">
+        <small>MC / Youngest of five</small>
+        <h3 style="margin:.35rem 0 .2rem 0;">Ava Parker</h3>
+        <p style="color:var(--muted); font-size:.75rem;">
+          River-sneaker, rule-bender, the one the mirror actually talks to. First day of high school and the magic house already wants something from her.
+        </p>
+      </div>
+      <div class="character">
+        <small>Eldest / in charge</small>
+        <h3 style="margin:.35rem 0 .2rem 0;">Aubrey Parker</h3>
+        <p style="color:var(--muted); font-size:.75rem;">
+          Precise, polished, runs the house like a captain. Knows the mirror’s warnings are serious and hates that Ava keeps testing it.
+        </p>
+      </div>
+      <div class="character">
+        <small>Twin 1</small>
+        <h3 style="margin:.35rem 0 .2rem 0;">Abigail Parker</h3>
+        <p style="color:var(--muted); font-size:.75rem;">
+          Soft, anxious, tied to the house’s gentle magic — braiding wildflowers that grow from the windowsill. She sees Grandmother clearly.
+        </p>
+      </div>
+      <div class="character">
+        <small>Twin 2</small>
+        <h3 style="margin:.35rem 0 .2rem 0;">Alicia Parker</h3>
+        <p style="color:var(--muted); font-size:.75rem;">
+          Unimpressed by drama. Practical. Rolls her eyes while wiping river water off the floors. But she’s watching.
+        </p>
+      </div>
+      <div class="character">
+        <small>Legacy in the mirror</small>
+        <h3 style="margin:.35rem 0 .2rem 0;">Grandmother Autumn</h3>
+        <p style="color:var(--muted); font-size:.75rem;">
+          Gone, but the house keeps her. Appears in glass to warn the girls: “You stirred it. And now it stirs for you.”
+        </p>
+      </div>
+      <div class="character">
+        <small>River boy</small>
+        <h3 style="margin:.35rem 0 .2rem 0;">Asher Blackwood</h3>
+        <p style="color:var(--muted); font-size:.75rem;">
+          Waiting by the bridge, fog curling around him. The river listens to him — and he knows Ava was always going to come.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Excerpt -->
+  <section id="excerpt">
+    <div class="tagline">Read a sample</div>
+    <h2 class="section-title">Chapter One – The Mirror</h2>
+    <p style="color:var(--muted); max-width:40rem; margin-bottom:1.2rem;">
+      I dropped your actual pages in here so people can preview it right on the site. You can add more chapters later.
+    </p>
+    <div class="excerpt-box">
+Welcome to my world—me and my sisters here in Marion County, Tennessee.
+The Parker farm sprawls across a hundred acres overlooking the Tennessee River, a place that feels like an escape from ordinary life. But nothing about this house is ordinary.
+
+From the road, the farmhouse looks long dead. Shutters hang crooked, paint peels in strips, and weeds claw up the porch like fingers desperate to drag the whole place into the earth...
+
+Ava had never feared the mirrors. Until last night.
+
+She stood in front of the long hallway glass, arms crossed, staring at a reflection that wasn’t quite hers...
+
+“You stirred it,” the ghost whispered. “And now it stirs for you.”
+
+A crack split across the mirror’s top corner, jagged as lightning. Somewhere deep in the walls, water dripped. One drop. Then another. Then the sound of rushing—like a river pressing against stone, waiting to break free.
+    </div>
+
+    <h3 style="margin-top:2rem; font-family:'Playfair Display',serif;">Chapter Two – The River Knows</h3>
+    <div class="excerpt-box" style="max-height:240px;">
+I couldn’t shake the image of Grandmother’s reflection from last night—the disappointment burning in her eyes like candle smoke.
+
+Being the youngest of five meant constant trouble. Always. And today—my first day of high school—I could already feel the universe plotting against me.
+
+The kitchen was alive. The bread browned itself. The kettle poured. My sisters filled every corner.
+
+“We need to talk about last night,” Aubrey said.
+
+Water rushed through the walls — then stopped.
+
+Later, at the bridge, the river boy was waiting.
+
+“Asher… how are you doing that?”
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="get">
+    <div class="cta">
+      <h2 class="section-title" style="margin-bottom:.5rem;">Ready to enter the Hollow?</h2>
+      <p style="color:var(--muted); max-width: 40rem; margin: 0 auto 1.3rem;">
+        Add your Amazon / Wattpad / pre-order / Google Form link here.
+      </p>
+      <a class="btn" href="#!" aria-label="Get The Mirror’s Warning now">Get The Mirror’s Warning</a>
+      <p style="margin-top:1rem; font-size:.7rem; color:var(--muted);">
+        Book One · Daughters of the Hollow · Marion County, Tennessee
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Daughters of the Hollow. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
